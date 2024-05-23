@@ -2,10 +2,13 @@ import axios from "axios";
 import { Search, Card, FilterBtn, Sidebar } from "./components";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Page } from "./features/Page";
+import { useSelector } from "react-redux";
+// import {customFetch} from './utils/index'
 function App() {
+  const skip = useSelector((state) => state.skip.value);
+  console.log(skip)
   const [searchField, setSearchField] = useState("");
-  const [skip, setSkip] = useState(0);
-  const [page, setPage] = useState(0);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["productData", skip],
@@ -46,28 +49,7 @@ function App() {
       />
 
       <Card data={data} filteredItem={filteredItem} />
-      <div className="join">
-        <button
-          className="join-item btn"
-          onClick={() => {
-            setSkip(skip - 10);
-            setPage(page - 1);
-          }}
-          disabled={skip === 0}
-        >
-          «
-        </button>
-        <button className="join-item btn">Page {page + 1}</button>
-        <button
-          className="join-item btn"
-          onClick={() => {
-            setSkip(skip + 10);
-            setPage(page + 1);
-          }}
-        >
-          »
-        </button>
-      </div>
+      <Page />
     </div>
   );
 }
