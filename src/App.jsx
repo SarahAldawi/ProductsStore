@@ -1,4 +1,4 @@
-import { FilterBtn, Sidebar, Navbar } from "./components";
+import { Sidebar, Navbar } from "./components";
 import { useQuery } from "@tanstack/react-query";
 import { Page } from "./features/Page";
 import { useSelector } from "react-redux";
@@ -9,10 +9,11 @@ function App() {
   const searchTerm = useSelector((state) => state.search.value);
   const sortBy = useSelector((state) => state.sort.sort);
   const order = useSelector((state) => state.sort.order);
+  const category = useSelector((state) => state.category.category);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["productData", skip, searchTerm, sortBy, order],
-    queryFn: () => fetchProducts(skip, searchTerm, sortBy, order),
+    queryKey: ["productData", skip, searchTerm, sortBy, order, category],
+    queryFn: () => fetchProducts(skip, searchTerm, sortBy, order, category),
   });
 
   //////prefetch Data
@@ -38,8 +39,7 @@ function App() {
       <Sort />
       <div className=" mx-auto max-w-screen grid grid-flow-row	">
         <Sidebar data={data} />
-        <FilterBtn data={data} />
-        <Page />
+        {category || sortBy ? <></> : <Page />}
       </div>
     </div>
   );

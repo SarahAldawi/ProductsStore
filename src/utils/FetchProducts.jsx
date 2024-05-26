@@ -6,9 +6,15 @@ import axios from "axios";
 //   baseURL: productsUrl,
 // });
 
-export const fetchProducts = async (skip, searchTerm, sortBy, order) => {
+export const fetchProducts = async (
+  skip,
+  searchTerm,
+  sortBy,
+  order,
+  category
+) => {
   try {
-    if (!searchTerm && !sortBy) {
+    if (!searchTerm && !sortBy && !category) {
       const response = await axios(
         "https://dummyjson.com/products" + `?limit=10&skip=${skip}`
       );
@@ -16,6 +22,11 @@ export const fetchProducts = async (skip, searchTerm, sortBy, order) => {
     } else if (sortBy) {
       const response = await axios(
         `https://dummyjson.com/products?sortBy=${sortBy}&order=${order}`
+      );
+      return response.data;
+    } else if (category) {
+      const response = await axios(
+        `https://dummyjson.com/products/category/${category}`
       );
       return response.data;
     } else {

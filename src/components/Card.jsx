@@ -11,14 +11,20 @@ function Card({ data }) {
               <img src={item.thumbnail} alt={item.title} />
             </figure>
             <div className="card-body">
-            <Rating />
+              <Rating />
               <h2>{item.category}</h2>
               <h2 className="card-title">{item.title}</h2>
               <p className="line-clamp-2">{item.description}</p>
               <h2 className="font-bold">${item.price}</h2>
               <p>{item.availabilityStatus}</p>
               <div className="card-actions justify-end">
-                <button className="btn btn-warning">Buy Now</button>
+                {item.availabilityStatus == "Out of Stock" ? (
+                  <button className="btn" disabled>
+                    Buy now
+                  </button>
+                ) : (
+                  <button className="btn btn-warning">Buy Now</button>
+                )}
               </div>
             </div>
           </div>
