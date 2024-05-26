@@ -1,55 +1,46 @@
-import axios from "axios";
-import { Search, Card, FilterBtn, Sidebar } from "./components";
+import { FilterBtn, Sidebar, Navbar } from "./components";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { Page } from "./features/Page";
 import { useSelector } from "react-redux";
-// import {customFetch} from './utils/index'
+import Sort from "./components/Sort";
+import fetchProducts from "./utils/FetchProducts";
 function App() {
   const skip = useSelector((state) => state.skip.value);
-  console.log(skip)
-  const [searchField, setSearchField] = useState("");
+  const searchTerm = useSelector((state) => state.search.value);
+  const sortBy = useSelector((state) => state.sort.sort);
+  const order = useSelector((state) => state.sort.order);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["productData", skip],
-    queryFn: async () => {
-      try {
-        const response = await axios(
-          "https://dummyjson.com/products" + `?limit=10&skip=${skip}`
-        );
-        return response.data;
-      } catch (error) {
-        throw new Error("Error fetching the data");
-      }
-    },
+    queryKey: ["productData", skip, searchTerm, sortBy, order],
+    queryFn: () => fetchProducts(skip, searchTerm, sortBy, order),
   });
 
   //////prefetch Data
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="bg-gray-100">
+        <Navbar />
+
+        <div className="flex items-center justify-center">
+          <span className="loading loading-spinner loading-lg">Loading...</span>
+        </div>
+      </div>
+    );
   }
   if (isError) {
     return <div>Error fetching</div>;
   }
 
-  const { products } = data;
-  const filteredItem = products.filter((person) => {
-    return person.brand.toLowerCase().includes(searchField.toLowerCase());
-  });
-
   return (
-    <div className="container">
-      <Search data={data} />
-      {/* <Sidebar/> */}
-      <FilterBtn
-        setSearchField={setSearchField}
-        filteredItem={filteredItem}
-        data={data}
-      />
-
-      <Card data={data} filteredItem={filteredItem} />
-      <Page />
+    <div className="bg-gray-100">
+      <Navbar />
+      <Sort />
+      <div className=" mx-auto max-w-screen grid grid-flow-row	">
+        <Sidebar data={data} />
+        <FilterBtn data={data} />
+        <Page />
+      </div>
     </div>
   );
 }

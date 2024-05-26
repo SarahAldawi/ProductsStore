@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import pageReducer from "../features/pageSlice";
 import skipSlice from "../features/skipSlice";
+import searchSlice from "../features/searchSlice";
+import sortSlice from "../features/SortSlice";
 
 export const store = configureStore({
   reducer: {
-    page: pageReducer,
     skip: skipSlice,
+    search: searchSlice,
+    sort: sortSlice,
   },
 });
-
