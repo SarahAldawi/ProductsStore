@@ -3,6 +3,7 @@ import skipSlice from "../features/skipSlice";
 import searchSlice from "../features/searchSlice";
 import sortSlice from "../features/SortSlice";
 import categorySlice from "../features/categorySlice";
+import brandSlice from "../features/brandSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     search: searchSlice,
     sort: sortSlice,
     category: categorySlice,
+    brand: brandSlice,
   },
 });

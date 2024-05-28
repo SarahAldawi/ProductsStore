@@ -15,4 +15,4 @@ const initialState = {
 });
 
 export const {setSearchTerm} = searchSlice.actions;
-export default searchSlice.reducer
+export default searchSlice.reducer;

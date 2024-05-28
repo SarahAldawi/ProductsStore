@@ -10,10 +10,12 @@ function App() {
   const sortBy = useSelector((state) => state.sort.sort);
   const order = useSelector((state) => state.sort.order);
   const category = useSelector((state) => state.category.category);
+  const brand = useSelector((state) => state.brand.brandName);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["productData", skip, searchTerm, sortBy, order, category],
-    queryFn: () => fetchProducts(skip, searchTerm, sortBy, order, category),
+    queryKey: ["productData", skip, searchTerm, sortBy, order, category, brand],
+    queryFn: () =>
+      fetchProducts(skip, searchTerm, sortBy, order, category, brand),
   });
 
   //////prefetch Data
@@ -39,7 +41,7 @@ function App() {
       <Sort />
       <div className=" mx-auto max-w-screen grid grid-flow-row	">
         <Sidebar data={data} />
-        {category || sortBy ? <></> : <Page />}
+        {category || sortBy || brand ? <></> : <Page />}
       </div>
     </div>
   );

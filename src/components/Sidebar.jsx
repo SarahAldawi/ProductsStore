@@ -19,7 +19,9 @@ function sidebar({ data }) {
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
           <SidebarItems />
-        <button className="btn btn-warning">Clear Filter</button>
+          <button className="btn btn-warning" onClick={() => location.reload()}>
+            Clear Filter
+          </button>
         </ul>
       </div>
     </div>

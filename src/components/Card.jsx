@@ -1,35 +1,16 @@
 import React from "react";
-import Rating from "./Rating";
-
+import { useSelector } from "react-redux";
+import Products from "./Products";
 function Card({ data }) {
+  const brandName = useSelector((state) => state.brand.brandName);
+
   return (
     <div className="bg-gray-100	container  grid gap-4  md:grid-cols-2 lg:grid-cols-4 ">
-      {data.products.map((item) => (
-        <div key={item.id}>
-          <div className="card shadow-xl hover:shadow-2xl transition duration-300 bg-white">
-            <figure>
-              <img src={item.thumbnail} alt={item.title} />
-            </figure>
-            <div className="card-body">
-              <Rating />
-              <h2>{item.category}</h2>
-              <h2 className="card-title">{item.title}</h2>
-              <p className="line-clamp-2">{item.description}</p>
-              <h2 className="font-bold">${item.price}</h2>
-              <p>{item.availabilityStatus}</p>
-              <div className="card-actions justify-end">
-                {item.availabilityStatus == "Out of Stock" ? (
-                  <button className="btn" disabled>
-                    Buy now
-                  </button>
-                ) : (
-                  <button className="btn btn-warning">Buy Now</button>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+      {brandName
+        ? data.products
+            .filter((item) => item.brand === brandName)
+            .map((item) => <Products key={item.id} item={item} />)
+        : data.products.map((item) => <Products key={item.id} item={item} />)}
     </div>
   );
 }
