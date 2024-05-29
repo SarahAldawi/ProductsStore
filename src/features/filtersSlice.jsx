@@ -41,12 +41,23 @@ export const filtersSlice = createSlice({
       state.category = "groceries";
     },
     setSearchTerm: (state, action) => {
-        state.search = action.payload;
-      },
+      state.search = action.payload;
+    },
   },
 });
 
-export const { essence, chanel, dior, velvetTouch, apple, samsung, beauty, smartphones, laptops, groceries, setSearchTerm } =
-  filtersSlice.actions;
+export const {
+  essence,
+  chanel,
+  dior,
+  velvetTouch,
+  apple,
+  samsung,
+  beauty,
+  smartphones,
+  laptops,
+  groceries,
+  setSearchTerm,
+} = filtersSlice.actions;
 
 export default filtersSlice.reducer;
