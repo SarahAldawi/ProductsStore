@@ -7,35 +7,49 @@ import {
   velvetTouch,
   apple,
   samsung,
+  updateBrand,
 } from "../features/brandSlice";
+
+const brands = [
+  "Essence",
+  "Chanel",
+  "Dior",
+  "Velvet Touch",
+  "Apple",
+  "Samsung",
+];
+
 function Categories() {
   const brand = useSelector((state) => state.brand);
   const dispatch = useDispatch();
+
   const handleBrand = (e) => {
     const selectedOption = e.target.value;
-    switch (selectedOption) {
-      case "Essence":
-        dispatch(essence());
-        break;
-      case "Chanel":
-        dispatch(chanel());
-        break;
-      case "Dior":
-        dispatch(dior());
-        break;
-      case "Velvet Touch":
-        dispatch(velvetTouch());
-        break;
-      case "Apple":
-        dispatch(apple());
-        break;
-      case "Samsung":
-        dispatch(samsung());
-        break;
-      default:
-        break;
-    }
+    dispatch(updateBrand(selectedOption));
+    // switch (selectedOption) {
+    //   case "Essence":
+    //     dispatch(essence());
+    //     break;
+    //   case "Chanel":
+    //     dispatch(chanel());
+    //     break;
+    //   case "Dior":
+    //     dispatch(dior());
+    //     break;
+    //   case "Velvet Touch":
+    //     dispatch(velvetTouch());
+    //     break;
+    //   case "Apple":
+    //     dispatch(apple());
+    //     break;
+    //   case "Samsung":
+    //     dispatch(samsung());
+    //     break;
+    //   default:
+    //     break;
+    // }
   };
+
   return (
     <>
       <div className="collapse collapse-arrow bg-base-200">
@@ -47,12 +61,11 @@ function Categories() {
             onChange={handleBrand}
             value={brand.brand}
           >
-            <option value="Essence">Essence</option>
-            <option value="Chanel">Chanel</option>
-            <option value="Dior">Dior</option>
-            <option value="Velvet Touch">Velvet Touch</option>
-            <option value="Apple">Apple</option>
-            <option value="Samsung">Samsung</option>
+            {brands.map((brand, index) => (
+              <option key={index} value={brand}>
+                {brand}
+              </option>
+            ))}
           </select>
         </div>
       </div>
