@@ -7,9 +7,9 @@ import {
   velvetTouch,
   apple,
   samsung,
-} from "../features/brandSlice";
+} from "../features/filtersSlice";
 function Categories() {
-  const brand = useSelector((state) => state.brand);
+  const brand = useSelector((state) => state.filters);
   const dispatch = useDispatch();
   const handleBrand = (e) => {
     const selectedOption = e.target.value;
@@ -36,6 +36,7 @@ function Categories() {
         break;
     }
   };
+
   return (
     <>
       <div className="collapse collapse-arrow bg-base-200">

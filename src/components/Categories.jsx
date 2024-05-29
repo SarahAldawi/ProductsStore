@@ -5,10 +5,9 @@ import {
   smartphones,
   laptops,
   groceries,
-} from "../features/categorySlice";
-// import Options from "./Options";
+} from "../features/filtersSlice";
 function Categories() {
-  const category = useSelector((state) => state.category);
+  const category = useSelector((state) => state.filters.category);
   const dispatch = useDispatch();
   const handleCategory = (e) => {
     const selectedOption = e.target.value;
@@ -52,5 +51,3 @@ function Categories() {
 }
 
 export default Categories;
-
-///////////https://dummyjson.com/products/category/smartphones

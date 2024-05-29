@@ -1,15 +1,15 @@
 import React from "react";
-import { setSearchTerm } from "../features/searchSlice";
+import { setSearchTerm } from "../features/filtersSlice";
 import { useDispatch, useSelector } from "react-redux";
+import _, { debounce } from "lodash";
 
 function Search() {
   const dispatch = useDispatch();
-  const searchTerm = useSelector((state) => state.search.value);
+  const searchTerm = useSelector((state) => state.filters.search);
 
   const handleChange = (e) => {
     dispatch(setSearchTerm(e.target.value));
   };
-
 
   return (
     <div className="ml-4">

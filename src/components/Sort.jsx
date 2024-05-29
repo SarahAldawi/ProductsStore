@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sortByLowerPrice,
   sortByTitle,
   sortByHigherPrice,
   sortByRating,
-} from "../features/SortSlice";
+} from "../features/paginationSlice";
 
 function Sort() {
-  const sort = useSelector((state) => state.sort);
+  const { sortBy } = useSelector((state) => state.pagination.sort);
   const dispatch = useDispatch();
   const handleSortChange = (e) => {
     const selectedOption = e.target.value;
@@ -34,7 +34,7 @@ function Sort() {
       <select
         className="select select-bordered w-full max-w-xs"
         onChange={handleSortChange}
-        value={sort.sort}
+        value={sortBy}
       >
         <option disabled value="">
           Sort by:

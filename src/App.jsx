@@ -4,21 +4,18 @@ import { Page } from "./features/Page";
 import { useSelector } from "react-redux";
 import Sort from "./components/Sort";
 import fetchProducts from "./utils/FetchProducts";
+import _, { debounce } from "lodash";
 function App() {
-  const skip = useSelector((state) => state.skip.value);
-  const searchTerm = useSelector((state) => state.search.value);
-  const sortBy = useSelector((state) => state.sort.sort);
-  const order = useSelector((state) => state.sort.order);
-  const category = useSelector((state) => state.category.category);
-  const brand = useSelector((state) => state.brand.brandName);
+  const { sortBy, order } = useSelector((state) => state.pagination.sort);
+  const { brand, category, search } = useSelector((state) => state.filters);
+  const { page } = useSelector((state) => state.pagination.skip);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["productData", skip, searchTerm, sortBy, order, category, brand],
-    queryFn: () =>
-      fetchProducts(skip, searchTerm, sortBy, order, category, brand),
+    queryKey: ["productData", page, search, sortBy, order, category, brand],
+    queryFn: () => fetchProducts(page, search, sortBy, order, category, brand),
   });
 
-  //////prefetch Data
+  
 
   if (isLoading) {
     return (

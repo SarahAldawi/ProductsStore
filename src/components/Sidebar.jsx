@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "./Card";
 import SidebarItems from "./SidebarItems";
-// import Sort from "./Sort";
 
 function sidebar({ data }) {
   return (
