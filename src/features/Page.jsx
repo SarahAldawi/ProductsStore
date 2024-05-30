@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextPage, prevPage } from "./paginationSlice";
 
 export function Page() {
-  const skip = useSelector((state) => state.pagination);
+  const skip = useSelector((state) => state.pagination.skip.page);
   const dispatch = useDispatch();
   return (
     <>
