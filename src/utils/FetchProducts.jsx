@@ -3,24 +3,24 @@ import axios from "axios";
 const url = "https://dummyjson.com/products";
 export const fetchProducts = async (
   skip,
-  searchTerm,
+  search,
   sortBy,
   order,
   category,
-  brand
+  brandName
 ) => {
   try {
     let query;
-    if (!searchTerm && !sortBy && !category && !brand) {
+    if (!search && !sortBy && !category && !brandName) {
       query = `?limit=10&skip=${skip}`;
-    } else if (sortBy && !searchTerm) {
+    } else if (sortBy && !search) {
       query = `?sortBy=${sortBy}&order=${order}`;
-    } else if (category && !searchTerm) {
+    } else if (category && !search) {
       query = `/category/${category}`;
-    } else if (brand) {
+    } else if (brandName) {
       query = "?limit=0";
     } else {
-      query = `/search?q=${searchTerm}`;
+      query = `/search?q=${search}`;
     }
     const response = await axios(url + query);
     return response.data;

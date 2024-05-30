@@ -1,16 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import skipSlice from "../features/skipSlice";
-import searchSlice from "../features/searchSlice";
-import sortSlice from "../features/SortSlice";
-import categorySlice from "../features/categorySlice";
-import brandSlice from "../features/brandSlice";
+import filterSlice from "../features/filterSlice";
+import paginationSlice from "../features/paginationSlice";
 
 export const store = configureStore({
   reducer: {
-    skip: skipSlice,
-    search: searchSlice,
-    sort: sortSlice,
-    category: categorySlice,
-    brand: brandSlice,
+    filter: filterSlice,
+    pagination: paginationSlice,
   },
 });

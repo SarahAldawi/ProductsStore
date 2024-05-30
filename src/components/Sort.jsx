@@ -5,10 +5,11 @@ import {
   sortByTitle,
   sortByHigherPrice,
   sortByRating,
-} from "../features/SortSlice";
+} from "../features/paginationSlice";
+
 
 function Sort() {
-  const sort = useSelector((state) => state.sort);
+  const sort = useSelector((state) => state.pagination);
   const dispatch = useDispatch();
   const handleSortChange = (e) => {
     const selectedOption = e.target.value;

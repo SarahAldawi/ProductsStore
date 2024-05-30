@@ -1,53 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  essence,
-  chanel,
-  dior,
-  velvetTouch,
-  apple,
-  samsung,
-  updateBrand,
-} from "../features/brandSlice";
+import { updateBrand } from "../features/filterSlice";
 
-const brands = [
+const brandsList = [
   "Essence",
   "Chanel",
   "Dior",
   "Velvet Touch",
   "Apple",
   "Samsung",
+  "Vivo",
+  "Realme",
+  "Lenovo",
+  "Huawei",
+  "Annibale Colombo",
 ];
 
 function Categories() {
-  const brand = useSelector((state) => state.brand);
+  const { brandName } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const handleBrand = (e) => {
     const selectedOption = e.target.value;
     dispatch(updateBrand(selectedOption));
-    // switch (selectedOption) {
-    //   case "Essence":
-    //     dispatch(essence());
-    //     break;
-    //   case "Chanel":
-    //     dispatch(chanel());
-    //     break;
-    //   case "Dior":
-    //     dispatch(dior());
-    //     break;
-    //   case "Velvet Touch":
-    //     dispatch(velvetTouch());
-    //     break;
-    //   case "Apple":
-    //     dispatch(apple());
-    //     break;
-    //   case "Samsung":
-    //     dispatch(samsung());
-    //     break;
-    //   default:
-    //     break;
-    // }
   };
 
   return (
@@ -59,9 +34,9 @@ function Categories() {
           <select
             className="select select-bordered w-full max-w-xs"
             onChange={handleBrand}
-            value={brand.brand}
+            value={brandName}
           >
-            {brands.map((brand, index) => (
+            {brandsList.map((brand, index) => (
               <option key={index} value={brand}>
                 {brand}
               </option>
@@ -74,5 +49,3 @@ function Categories() {
 }
 
 export default Categories;
-
-///////////https://dummyjson.com/products/category/smartphones

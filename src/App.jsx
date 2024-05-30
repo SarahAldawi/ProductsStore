@@ -5,21 +5,14 @@ import { useSelector } from "react-redux";
 import Sort from "./components/Sort";
 import fetchProducts from "./utils/FetchProducts";
 function App() {
-  const skip = useSelector((state) => state.skip.value);
-  const searchTerm = useSelector((state) => state.search.value);
-  const sortBy = useSelector((state) => state.sort.sort);
-  const order = useSelector((state) => state.sort.order);
-  const category = useSelector((state) => state.category.category);
-  const brand = useSelector((state) => state.brand.brandName);
-
+  const skip = useSelector((state) => state.pagination.skip.page);
+  const {sortBy,order} = useSelector((state) => state.pagination.sort);
+  const {brandName, category, search } = useSelector((state) => state.filter);
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["productData", skip, searchTerm, sortBy, order, category, brand],
+    queryKey: ["productData", skip, search, sortBy, order, category, brandName],
     queryFn: () =>
-      fetchProducts(skip, searchTerm, sortBy, order, category, brand),
+      fetchProducts(skip, search, sortBy, order, category, brandName),
   });
-
-  //////prefetch Data
-
   if (isLoading) {
     return (
       <div className="bg-gray-100">
@@ -41,7 +34,7 @@ function App() {
       <Sort />
       <div className=" mx-auto max-w-screen grid grid-flow-row	">
         <Sidebar data={data} />
-        {category || sortBy || brand ? <></> : <Page />}
+        {category || sortBy || brandName || search? <></> : <Page />}
       </div>
     </div>
   );

@@ -1,23 +1,21 @@
-import React from "react";
-import { setSearchTerm } from "../features/searchSlice";
+import React, { useEffect, useMemo } from "react";
+import { setSearchTerm } from "../features/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import _ from "lodash";
-
+import { useState } from "react";
+import { debounce } from "lodash";
 function Search() {
   const dispatch = useDispatch();
-  // const searchTerm = useSelector((state) => state.search.value);
+  const [search, setSearch] = useState("");
 
-  // const handleChange = (e) => {
-  //   dispatch(setSearchTerm(e.target.value));
-  // };
-
-  const [searchTerm, SetsearchTerm] = useState("");
+  const debouncedSearch = useMemo(
+    () => debounce((searchTerm) => dispatch(setSearchTerm(searchTerm)), 500),
+    [dispatch]
+  );
 
   const handleChange = (e) => {
-    SetsearchTerm(e.target.value);
-    _.debounce(() => {
-      dispatch(setSearchTerm(e.target.value));
-    }, 4000);
+    const value = e.target.value;
+    setSearch(value);
+    debouncedSearch(value);
   };
 
   return (
@@ -27,7 +25,7 @@ function Search() {
           type="text"
           className="grow"
           placeholder="What are you looking for?"
-          value={searchTerm}
+          value={search}
           onChange={handleChange}
         />
         <svg
