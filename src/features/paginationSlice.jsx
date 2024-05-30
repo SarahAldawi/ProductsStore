@@ -41,4 +41,8 @@ export const { nextPage, prevPage,  sortByLowerPrice,
   sortByRating,
   sortByTitle, } = paginationSlice.actions;
 
+<<<<<<< HEAD
 export default paginationSlice.reducer;
+=======
+export default paginationSlice.reducer;
+>>>>>>> dawi

@@ -6,9 +6,16 @@ import {
   sortByHigherPrice,
   sortByRating,
 } from "../features/paginationSlice";
+<<<<<<< HEAD
 
 function Sort() {
   const { sortBy } = useSelector((state) => state.pagination.sort);
+=======
+
+
+function Sort() {
+  const sort = useSelector((state) => state.pagination);
+>>>>>>> dawi
   const dispatch = useDispatch();
   const handleSortChange = (e) => {
     const selectedOption = e.target.value;

@@ -6,7 +6,10 @@ function SidebarItems() {
     <div>
       <Categories />
       <Brands />
+<<<<<<< HEAD
     
+=======
+>>>>>>> dawi
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import {
   essence,
   chanel,
@@ -10,31 +11,31 @@ import {
 } from "../features/filtersSlice";
 function Categories() {
   const brand = useSelector((state) => state.filters);
+=======
+import { updateBrand } from "../features/filterSlice";
+
+const brandsList = [
+  "Essence",
+  "Chanel",
+  "Dior",
+  "Velvet Touch",
+  "Apple",
+  "Samsung",
+  "Vivo",
+  "Realme",
+  "Lenovo",
+  "Huawei",
+  "Annibale Colombo",
+];
+
+function Categories() {
+  const { brandName } = useSelector((state) => state.filter);
+>>>>>>> dawi
   const dispatch = useDispatch();
+
   const handleBrand = (e) => {
     const selectedOption = e.target.value;
-    switch (selectedOption) {
-      case "Essence":
-        dispatch(essence());
-        break;
-      case "Chanel":
-        dispatch(chanel());
-        break;
-      case "Dior":
-        dispatch(dior());
-        break;
-      case "Velvet Touch":
-        dispatch(velvetTouch());
-        break;
-      case "Apple":
-        dispatch(apple());
-        break;
-      case "Samsung":
-        dispatch(samsung());
-        break;
-      default:
-        break;
-    }
+    dispatch(updateBrand(selectedOption));
   };
 
   return (
@@ -46,14 +47,13 @@ function Categories() {
           <select
             className="select select-bordered w-full max-w-xs"
             onChange={handleBrand}
-            value={brand.brand}
+            value={brandName}
           >
-            <option value="Essence">Essence</option>
-            <option value="Chanel">Chanel</option>
-            <option value="Dior">Dior</option>
-            <option value="Velvet Touch">Velvet Touch</option>
-            <option value="Apple">Apple</option>
-            <option value="Samsung">Samsung</option>
+            {brandsList.map((brand, index) => (
+              <option key={index} value={brand}>
+                {brand}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -62,5 +62,3 @@ function Categories() {
 }
 
 export default Categories;
-
-///////////https://dummyjson.com/products/category/smartphones

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { setSearchTerm } from "../features/filtersSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,9 +7,26 @@ import _, { debounce } from "lodash";
 function Search() {
   const dispatch = useDispatch();
   const searchTerm = useSelector((state) => state.filters.search);
+=======
+import React, { useEffect, useMemo } from "react";
+import { setSearchTerm } from "../features/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { debounce } from "lodash";
+function Search() {
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+
+  const debouncedSearch = useMemo(
+    () => debounce((searchTerm) => dispatch(setSearchTerm(searchTerm)), 500),
+    [dispatch]
+  );
+>>>>>>> dawi
 
   const handleChange = (e) => {
-    dispatch(setSearchTerm(e.target.value));
+    const value = e.target.value;
+    setSearch(value);
+    debouncedSearch(value);
   };
 
   return (
@@ -18,7 +36,7 @@ function Search() {
           type="text"
           className="grow"
           placeholder="What are you looking for?"
-          value={searchTerm}
+          value={search}
           onChange={handleChange}
         />
         <svg
