@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "./Card";
 import SidebarItems from "./SidebarItems";
-// import Sort from "./Sort";
-
+import { useDispatch } from "react-redux";
+import { clearFilter } from "../features/filterSlice";
 function sidebar({ data }) {
+  const dispatch = useDispatch()
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -19,7 +20,7 @@ function sidebar({ data }) {
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
           <SidebarItems />
-          <button className="btn btn-warning" onClick={() => location.reload()}>
+          <button className="btn btn-warning" onClick={() => dispatch(clearFilter())}>
             Clear Filter
           </button>
         </ul>
