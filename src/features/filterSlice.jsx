@@ -19,10 +19,13 @@ export const filterSlice = createSlice({
     setSearchTerm: (state, action) => {
       state.search = action.payload;
     },
+    clearFilter: () => {
+      return initialState;
+    },
   },
 });
 
 export default filterSlice.reducer;
 
-export const { updateBrand, updateCategory, setSearchTerm } =
+export const { updateBrand, updateCategory, setSearchTerm, clearFilter } =
   filterSlice.actions;
